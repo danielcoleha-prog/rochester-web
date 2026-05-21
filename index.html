@@ -293,11 +293,12 @@
     }
     .hero-sport-badge span {
       font-family: var(--font-body);
-      font-size: 10px;
+      font-size: 11px;
       font-weight: 700;
       letter-spacing: 0.28em;
       text-transform: uppercase;
       color: var(--gold);
+      text-shadow: 0 2px 12px rgba(0,15,46,0.6);
     }
 
     /* Primary sport name — the focal point */
@@ -748,6 +749,95 @@
       color: var(--gold);
     }
 
+    /* Race feature image (overhead 8+) */
+    .race-feature {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 32px;
+      align-items: stretch;
+      margin-top: 56px;
+      padding: 0;
+    }
+    @media (max-width: 900px) {
+      .race-feature { grid-template-columns: 1fr; }
+    }
+    .race-feature-img {
+      position: relative;
+      overflow: hidden;
+      min-height: 420px;
+      background: var(--navy-mid);
+      border: 1px solid rgba(250,200,0,0.12);
+    }
+    .race-feature-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+    .race-feature-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 60%, rgba(0,15,46,0.5) 100%);
+    }
+    .race-feature-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 16px;
+      padding: 8px 0;
+    }
+    .race-feature-eyebrow {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .race-feature-title {
+      font-family: var(--font-heading);
+      font-weight: 900;
+      font-size: clamp(32px, 4.5vw, 52px);
+      text-transform: uppercase;
+      line-height: 0.98;
+      letter-spacing: -0.02em;
+      color: var(--cream);
+    }
+    .race-feature-body {
+      font-size: 14px;
+      line-height: 1.78;
+      color: rgba(248,246,240,0.7);
+      max-width: 520px;
+    }
+    .race-feature-stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 28px;
+      margin-top: 8px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(250,200,0,0.15);
+    }
+    .race-feature-stat {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .race-feature-stat .num {
+      font-family: var(--font-heading);
+      font-weight: 900;
+      font-size: 26px;
+      color: var(--gold);
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+    .race-feature-stat .lbl {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(248,246,240,0.4);
+    }
+
     /* legacy race-strip/race-placeholder kept for reference but hidden */
     .race-strip { display: none; }
     .race-placeholder {
@@ -802,6 +892,50 @@
     }
     .academics-header .section-heading .gold-line {
       color: var(--gold-dark);
+    }
+
+    /* Campus photo strip (academics) */
+    .campus-strip {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1.2fr;
+      gap: 16px;
+      margin-bottom: 56px;
+    }
+    @media (max-width: 768px) {
+      .campus-strip { grid-template-columns: 1fr; gap: 12px; }
+    }
+    .campus-tile {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 4 / 3;
+      background: var(--navy);
+    }
+    .campus-tile.tall { aspect-ratio: 4 / 5; }
+    .campus-tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s var(--ease-spring);
+    }
+    .campus-tile:hover img { transform: scale(1.05); }
+    .campus-tile::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 55%, rgba(0,15,46,0.5) 100%);
+      pointer-events: none;
+    }
+    .campus-tile-label {
+      position: absolute;
+      bottom: 16px;
+      left: 18px;
+      z-index: 2;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
     }
 
     /* Pull quote */
@@ -911,13 +1045,60 @@
       overflow: hidden;
     }
     .quotes-header {
-      margin-bottom: clamp(48px, 6vw, 80px);
+      margin-bottom: clamp(40px, 5vw, 56px);
       display: flex;
       flex-direction: column;
       gap: 12px;
     }
     .quotes-header .section-heading {
       font-size: clamp(52px, 9vw, 100px);
+    }
+
+    /* Team showcase strip (above quotes) */
+    .team-showcase {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr 1fr;
+      gap: 16px;
+      margin-bottom: clamp(48px, 6vw, 72px);
+    }
+    @media (max-width: 880px) {
+      .team-showcase { grid-template-columns: 1fr; }
+    }
+    .team-showcase-tile {
+      position: relative;
+      overflow: hidden;
+      background: var(--navy);
+    }
+    .team-showcase-tile.feature {
+      grid-row: span 1;
+      min-height: 360px;
+    }
+    .team-showcase-tile.portrait { aspect-ratio: 3 / 4; }
+    .team-showcase-tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s var(--ease-spring);
+    }
+    .team-showcase-tile:hover img { transform: scale(1.04); }
+    .team-showcase-tile::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 55%, rgba(0,15,46,0.7) 100%);
+      pointer-events: none;
+    }
+    .team-showcase-label {
+      position: absolute;
+      left: 20px;
+      bottom: 18px;
+      z-index: 2;
+      font-family: var(--font-heading);
+      font-weight: 900;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
     }
 
     /* Quote cards — large, full-width, clean */
@@ -929,6 +1110,114 @@
       background: rgba(255,255,255,0.03);
     }
     .quote-card:last-child { margin-bottom: 0; }
+
+    /* Athlete card — photo + dual quotes (academic + athletic) */
+    .athlete-card {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 0;
+      margin-bottom: 28px;
+      border: 1px solid rgba(250,200,0,0.12);
+      background: rgba(255,255,255,0.025);
+      overflow: hidden;
+    }
+    .athlete-card.reverse { grid-template-columns: 1fr 320px; }
+    @media (max-width: 880px) {
+      .athlete-card,
+      .athlete-card.reverse { grid-template-columns: 1fr; }
+    }
+    .athlete-photo {
+      position: relative;
+      overflow: hidden;
+      min-height: 360px;
+      background: var(--navy);
+    }
+    .athlete-card.reverse .athlete-photo { order: 2; }
+    @media (max-width: 880px) {
+      .athlete-card.reverse .athlete-photo { order: 0; }
+      .athlete-photo { aspect-ratio: 4 / 3; min-height: 0; }
+    }
+    .athlete-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: contrast(1.05) saturate(1.05);
+    }
+    .athlete-photo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 50%, rgba(0,15,46,0.55) 100%);
+      pointer-events: none;
+    }
+    .athlete-photo-name {
+      position: absolute;
+      bottom: 22px;
+      left: 24px;
+      right: 24px;
+      z-index: 2;
+    }
+    .athlete-photo-name .name {
+      display: block;
+      font-family: var(--font-heading);
+      font-weight: 900;
+      font-size: 28px;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      color: var(--cream);
+      line-height: 1;
+    }
+    .athlete-photo-name .meta {
+      display: block;
+      margin-top: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .athlete-quotes {
+      padding: clamp(28px, 4vw, 44px);
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    .athlete-quote-block {
+      position: relative;
+    }
+    .athlete-quote-tag {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--navy);
+      background: var(--gold);
+      padding: 4px 10px;
+      margin-bottom: 12px;
+    }
+    .athlete-quote-tag.athletic { background: rgba(250,200,0,0.15); color: var(--gold); border: 1px solid rgba(250,200,0,0.4); }
+    .athlete-quote-text {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: clamp(14px, 1.4vw, 16px);
+      line-height: 1.7;
+      color: rgba(248,246,240,0.85);
+      letter-spacing: 0.005em;
+    }
+    .athlete-quote-text::before {
+      content: '"';
+      font-family: var(--font-display);
+      font-size: 36px;
+      color: var(--gold);
+      line-height: 0;
+      margin-right: 4px;
+      vertical-align: -10px;
+    }
+    .athlete-divider {
+      height: 1px;
+      background: linear-gradient(90deg, rgba(250,200,0,0.3), transparent);
+    }
     .quote-mark {
       font-family: var(--font-display);
       font-size: 96px;
@@ -1196,15 +1485,15 @@
 
       <!-- "Why Rochester?" -->
       <div class="reveal" style="margin-bottom: 28px;">
-        <span style="font-family: var(--font-heading); font-weight: 900; font-size: clamp(32px, 5vw, 60px); text-transform: uppercase; letter-spacing: -0.02em; color: rgba(248,246,240,0.6); line-height: 1;">Why Rochester?</span>
+        <span style="font-family: var(--font-heading); font-weight: 900; font-size: clamp(32px, 5vw, 60px); text-transform: uppercase; letter-spacing: -0.02em; color: var(--cream); line-height: 1; text-shadow: 0 2px 24px rgba(0,15,46,0.6);">Why Rochester?</span>
       </div>
 
       <div class="hero-ctas reveal">
-        <a href="#video" class="btn-primary">
-          See the Team
+        <a href="https://questionnaires.armssoftware.com/171d8a68a0ba" target="_blank" rel="noopener" class="btn-primary">
+          Recruit Questionnaire
           <svg width="13" height="13" fill="none" viewBox="0 0 14 14"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
-        <a href="#academics" class="btn-outline">Academics</a>
+        <a href="#video" class="btn-outline">See the Team</a>
       </div>
 
 
@@ -1364,12 +1653,38 @@
 
         <!-- Card 3: Liberty League Championship -->
         <div class="race-card reveal reveal-delay-2">
-          <span class="race-card-label">2025 · Liberty League</span>
+          <span class="race-card-label">2026 · Liberty League</span>
           <h3 class="race-card-title">Liberty League<br>Championship</h3>
-          <p class="race-card-body">1V8 finished 4th beating rival RIT.</p>
+          <p class="race-card-body">1V8 finished 4th, beating rival RIT in a defining moment of the season — proof of the consistent, gritty boat speed that defines Yellow Jacket rowing.</p>
           <div class="race-card-stat">1V8 — 4th Place · Defeated RIT</div>
         </div>
 
+      </div>
+
+      <!-- Feature image — overhead 4+ -->
+      <div class="race-feature reveal">
+        <div class="race-feature-img">
+          <img src="images/boat-overhead.png" alt="Overhead view of UR rowers in a four">
+        </div>
+        <div class="race-feature-content">
+          <span class="race-feature-eyebrow">In the Boat</span>
+          <h3 class="race-feature-title">One Boat.<br>One Stroke.</h3>
+          <p class="race-feature-body">From the Charles to the Genesee, Yellow Jackets race with the precision and trust that only come from thousands of strokes pulled together. Every season — every catch, every release — is built on the rower beside you.</p>
+          <div class="race-feature-stat-row">
+            <div class="race-feature-stat">
+              <span class="num">40+</span>
+              <span class="lbl">Boats Raced HOCR</span>
+            </div>
+            <div class="race-feature-stat">
+              <span class="num">3rd</span>
+              <span class="lbl">V8 — Head of the Genesee</span>
+            </div>
+            <div class="race-feature-stat">
+              <span class="num">4th</span>
+              <span class="lbl">1V8 — Liberty League '26</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -1387,28 +1702,84 @@
         </h2>
       </div>
 
+      <!-- Team showcase: official team photo + on-water moments -->
+      <div class="team-showcase reveal">
+        <div class="team-showcase-tile portrait">
+          <img src="images/rower-beanie.png" alt="Coxswain on the Genesee in a ROCHESTER boat">
+          <span class="team-showcase-label">On the Water</span>
+        </div>
+        <div class="team-showcase-tile feature">
+          <img src="images/team-gym.png" alt="UR Women's Rowing official team photo">
+          <span class="team-showcase-label">2025–26 Yellow Jackets</span>
+        </div>
+        <div class="team-showcase-tile portrait">
+          <img src="images/boat-sunset.png" alt="Eight rowers training at sunset on the Genesee">
+          <span class="team-showcase-label">Golden Hour</span>
+        </div>
+      </div>
+
       <!-- ── JULIA TRICOMI ── -->
-      <div class="quote-card reveal">
-        <div class="quote-mark">"</div>
-        <p class="quote-text">The student comes first in "student-athlete" and coaches understand very well that academic commitments and dedication are the top priority for students. This prioritization of academics does not mean we don't pursue athletic excellence, but rather that we cultivate individuals who are well-rounded in all aspects of their lives, just as we want to be multifaceted and dynamic athletes.</p>
-        <div class="quote-attribution">
-          <div class="qa-bar"></div>
-          <div class="qa-details">
-            <span class="qa-name">Julia Tricomi</span>
-            <span class="qa-sub">Junior &nbsp;·&nbsp; International Relations & Spanish &nbsp;·&nbsp; Minor: Latin American Studies</span>
+      <div class="athlete-card reveal">
+        <div class="athlete-photo">
+          <img src="images/julia-portrait.png" alt="Julia Tricomi with R rowing oar">
+          <div class="athlete-photo-name">
+            <span class="name">Julia Tricomi</span>
+            <span class="meta">Junior · IR &amp; Spanish · Minor in Latin American Studies</span>
+          </div>
+        </div>
+        <div class="athlete-quotes">
+          <div class="athlete-quote-block">
+            <span class="athlete-quote-tag">On Academics</span>
+            <p class="athlete-quote-text">The open curriculum frees students up to either dive deep into their area of academic interest or to explore multiple unrelated subjects they are curious about. This leads to a rich variety of courses offered that can satisfy just about any topic of interest. The medium size of the school (~6,000 undergrads) and the spread of students across many concentrations means a large percentage of classes have fewer than 30 students — allowing for strong student-professor relationships that enhance learning, foster career connections, and create real community.</p>
+          </div>
+          <div class="athlete-divider"></div>
+          <div class="athlete-quote-block">
+            <span class="athlete-quote-tag athletic">On Rowing</span>
+            <p class="athlete-quote-text">The student comes first in "student-athlete," and our coaches understand that academic commitments are usually the top priority — even before the sport we love. I studied abroad for a semester, something mandatory for my major that I had wanted to do for a long time. Where other programs might have discouraged that, our coaches actively encouraged me to go, and were excited to help me get back into rowing when I returned. This prioritization of academics doesn't mean we don't pursue athletic excellence — it means we cultivate individuals who are well-rounded, multifaceted, and dynamic.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── RACHEL RUMINER ── -->
+      <div class="athlete-card reverse reveal">
+        <div class="athlete-quotes">
+          <div class="athlete-quote-block">
+            <span class="athlete-quote-tag">On Academics</span>
+            <p class="athlete-quote-text">It's a very academically competitive school, but the students foster a community. We work together on assignments and help each other out instead of competing against one another.</p>
+          </div>
+          <div class="athlete-divider"></div>
+          <div class="athlete-quote-block">
+            <span class="athlete-quote-tag athletic">On Rowing</span>
+            <p class="athlete-quote-text">With the flexibility of D3 athletics, I can compete at a high level in both sports that I do — and I feel genuinely supported in that endeavor.</p>
+          </div>
+        </div>
+        <div class="athlete-photo">
+          <img src="images/rower-sunglasses.png" alt="Rachel Ruminer rowing">
+          <div class="athlete-photo-name">
+            <span class="name">Rachel Ruminer</span>
+            <span class="meta">Sophomore · Mechanical Engineering</span>
           </div>
         </div>
       </div>
 
       <!-- ── ELIZABETH CARLETON ── -->
-      <div class="quote-card reveal">
-        <div class="quote-mark">"</div>
-        <p class="quote-text">The flexibility within the Rochester curriculum has allowed me to pursue the creative side of myself by majoring in Creative Writing alongside my pursuit of being a scientist. Along with this, most schools of our undergraduate size are liberal arts focused, so it's unique to find a school with such a STEM focus without being a large school.</p>
-        <div class="quote-attribution">
-          <div class="qa-bar"></div>
-          <div class="qa-details">
-            <span class="qa-name">Elizabeth Carleton</span>
-            <span class="qa-sub">Senior &nbsp;·&nbsp; Biology & Creative Writing</span>
+      <div class="athlete-card reveal">
+        <div class="athlete-photo">
+          <img src="images/liz-rowing.png" alt="Elizabeth Carleton in boat smiling">
+          <div class="athlete-photo-name">
+            <span class="name">Elizabeth Carleton</span>
+            <span class="meta">Senior · Biology &amp; Creative Writing · VSAAC President</span>
+          </div>
+        </div>
+        <div class="athlete-quotes">
+          <div class="athlete-quote-block">
+            <span class="athlete-quote-tag">On Academics</span>
+            <p class="athlete-quote-text">The Rochester Curriculum has allowed me to pursue the creative side of myself by majoring in Creative Writing alongside my pursuit of being a scientist. Most schools of our undergraduate size are liberal-arts focused, so it's unique to find a school with such a STEM focus without being large — and it's still a Tier 1 research institution.</p>
+          </div>
+          <div class="athlete-divider"></div>
+          <div class="athlete-quote-block">
+            <span class="athlete-quote-tag athletic">On Rowing</span>
+            <p class="athlete-quote-text">Rowing at Rochester opened the door for me to lead beyond the boat — serving as VSAAC President and engaging with NCAA initiatives. The program builds athletes who lead in every space they enter.</p>
           </div>
         </div>
       </div>
@@ -1429,6 +1800,22 @@
           Meliora,<br>
           <span class="gold-line">Ever Better.</span>
         </h2>
+      </div>
+
+      <!-- Campus photo strip -->
+      <div class="campus-strip reveal">
+        <div class="campus-tile">
+          <img src="images/campus-meliora.png" alt="MELIORA sign in front of Rush Rhees Library">
+          <span class="campus-tile-label">Meliora</span>
+        </div>
+        <div class="campus-tile tall">
+          <img src="images/campus-library.png" alt="Rush Rhees Library in autumn">
+          <span class="campus-tile-label">Rush Rhees Library</span>
+        </div>
+        <div class="campus-tile">
+          <img src="images/campus-aerial.png" alt="Aerial view of UR campus along the Genesee River">
+          <span class="campus-tile-label">River Campus</span>
+        </div>
       </div>
 
       <!-- Academic pillars grid -->
@@ -1527,28 +1914,29 @@
         Jacket?
       </h2>
       <div class="cta-buttons reveal">
-        <!-- EDIT: Update Rowing Athletics URL -->
-        <a href="https://uofrathletics.com/sports/womens-rowing" target="_blank" class="btn-primary">
-          Rowing — Athletics Website
+        <a href="https://questionnaires.armssoftware.com/171d8a68a0ba" target="_blank" rel="noopener" class="btn-primary">
+          Recruit Questionnaire
           <svg width="14" height="14" fill="none" viewBox="0 0 14 14"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
-        <!-- EDIT: Update Instagram URL -->
-        <a href="https://www.instagram.com/urwomensrowing/" target="_blank" class="btn-outline">Instagram</a>
-        <a href="https://www.facebook.com/URWomensRowing" target="_blank" class="btn-outline">Facebook</a>
+        <a href="https://admissions.rochester.edu/applying/how-to-apply/" target="_blank" rel="noopener" class="btn-primary" style="background: var(--cream); color: var(--navy);">
+          How to Apply
+          <svg width="14" height="14" fill="none" viewBox="0 0 14 14"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="https://uofrathletics.com/sports/womens-rowing" target="_blank" rel="noopener" class="btn-outline">Athletics Website</a>
+        <a href="https://www.instagram.com/urwomensrowing/" target="_blank" rel="noopener" class="btn-outline">Instagram</a>
+        <a href="https://www.facebook.com/URWomensRowing" target="_blank" rel="noopener" class="btn-outline">Facebook</a>
       </div>
 
       <!-- Coach section -->
       <div class="cta-coach reveal">
         <div class="coach-img-wrap">
-          <!-- EDIT: This is the coaching staff portrait — replace with Ethan Curren's photo -->
           <img src="images/3H9A1255.jpg" alt="Ethan Curren — Head Coach, UR Women's Rowing">
         </div>
         <div class="coach-info">
           <div class="coach-label">Head Coach</div>
-          <!-- EDIT: Update coach name, background, and contact -->
           <h3 class="coach-name">Ethan Curren</h3>
           <p class="coach-bio">
-            Coach Ethan Curren leads the University of Rochester Women's Rowing program. Reach out to learn more about the program, visits, and what it means to be a Yellow Jacket on and off the water.
+            Ethan leads the University of Rochester Women's Rowing program with a fierce belief in the people first, the boat second. He's the kind of coach who builds rowers who win on the water and graduates who carry themselves with the same composure off it. Reach out to learn what it means to be a Yellow Jacket.
           </p>
         </div>
       </div>
